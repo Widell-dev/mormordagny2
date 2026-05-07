@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace api.DTOs.SupplierDTO
 {
-    public class SupplierIngredientDTO
+    public class PutSupplierIngredientDTO
     {
-        public string IngredientId { get; set; }
-        public string IngredientName { get; set; }
         public decimal PricePerKg { get; set; }
     }
 }
