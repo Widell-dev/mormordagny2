@@ -21,6 +21,7 @@ namespace api.Controllers
             var result = map.Map<IReadOnlyList<GetSupplierWithIngredientsDTO>>(suppliers);
             return Ok(result);
         }
+        
 
         [HttpGet("{id}")]
         public async Task<ActionResult> GetSupplierById(string id)

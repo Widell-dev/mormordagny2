@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace api.DTOs.SupplierDTO
 {
-    public class SupplierIngredientDTO
+    public class SupplierIngredientDTO:BaseSupplierDTO
     {
         public string IngredientId { get; set; }
         public string IngredientName { get; set; }

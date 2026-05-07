@@ -15,47 +15,66 @@ namespace api.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<Customer, GetCustomerByIdDTO>();
-            CreateMap<Address, AddressDTO>();
-            CreateMap<Order, OrderSumDTO>();
+            
+            CreateMap<Customer, GetCustomerDTO>();
+            CreateMap<Customer, GetCustomerByIdDTO>()
+                .ForMember(d => d.Orders, o => o.MapFrom(s => s.Orders));
 
-            CreateMap<PostCustomerDTO, Customer>()
-                .ForMember(dest => dest.DeliveryAddress, opt => opt.MapFrom(src => src.DeliveryAddress))
-                .ForMember(dest => dest.InvoiceAddress, opt => opt.MapFrom(src => src.InvoiceAddress));
+            CreateMap<Address, AddressDTO>();
             CreateMap<AddressDTO, Address>();
 
+            CreateMap<PostCustomerDTO, Customer>()
+                .ForMember(d => d.DeliveryAddress, o => o.MapFrom(s => s.DeliveryAddress))
+                .ForMember(d => d.InvoiceAddress, o => o.MapFrom(s => s.InvoiceAddress));
+
+            CreateMap<PatchCustomerDTO, Customer>();
+
+
+            
             CreateMap<Ingredient, GetIngredientDTO>()
                 .ForMember(d => d.Suppliers, o => o.MapFrom(s => s.SupplierIngredients));
 
+            CreateMap<PostIngredientDTO, Ingredient>();
+            CreateMap<PutIngredientDTO, Ingredient>();
+
+            
             CreateMap<SupplierIngredient, SupplierIngredientDTO>()
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.SupplierId))
+                .ForMember(d => d.SupplierName, o => o.MapFrom(s => s.Supplier.SupplierName))
+                .ForMember(d => d.IngredientId, o => o.MapFrom(s => s.IngredientId))
                 .ForMember(d => d.IngredientName, o => o.MapFrom(s => s.Ingredient.IngredientName))
-                .ForMember(d => d.Email, o => o.MapFrom(s => s.Supplier.Email))
                 .ForMember(d => d.PricePerKg, o => o.MapFrom(s => s.PricePerKg));
 
 
-            CreateMap<Product, GetProductDTO>();
-            CreateMap<PostProductDTO, Product>();
-            CreateMap<PatchProductDTO, Product>();
-
-            CreateMap<OrderItem, GetOrderItemDTO>()
-                .ForMember(d => d.ProductName, m => m.MapFrom(s => s.ItemOrdered.ProductName));
-
-            CreateMap<Order, GetOrdersDTO>()
-                .ForMember(d => d.CustomerName, m => m.MapFrom(s => s.Customer.CompanyName))
-                .ForMember(d => d.Items, m => m.MapFrom(s => s.OrderItems))
-                .ForMember(d => d.SubTotal, m => m.MapFrom(s => s.SubTotal));
-
+            
             CreateMap<PostSupplierDTO, Supplier>();
-
             CreateMap<Supplier, GetSupplierDTO>();
 
             CreateMap<Supplier, GetSupplierWithIngredientsDTO>()
                 .ForMember(d => d.Ingredients, o => o.MapFrom(s => s.SupplierIngredients));
 
-            CreateMap<SupplierIngredient, SupplierIngredientDTO>()
-                .ForMember(d => d.IngredientName, o => o.MapFrom(s => s.Ingredient.IngredientName));
+
+            
+            CreateMap<Product, GetProductDTO>();
+            CreateMap<PostProductDTO, Product>();
+            CreateMap<PatchProductDTO, Product>();
 
 
+            
+            CreateMap<OrderItem, GetOrderItemDTO>()
+                .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ItemOrdered.ProductName))
+                .ForMember(d => d.Price, o => o.MapFrom(s => s.Price))
+                .ForMember(d => d.Quantity, o => o.MapFrom(s => s.Quantity))
+                .ForMember(d => d.SubTotal, o => o.MapFrom(s => s.Price * s.Quantity));
+
+
+            
+            CreateMap<Order, GetOrdersDTO>()
+                .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.Customer.CompanyName))
+                .ForMember(d => d.CustomerContact, o => o.MapFrom(s => s.Customer.ContactPerson))
+                .ForMember(d => d.CustomerEmail, o => o.MapFrom(s => s.Customer.Email))
+                .ForMember(d => d.Items, o => o.MapFrom(s => s.OrderItems))
+                .ForMember(d => d.SubTotal, o => o.MapFrom(s => s.SubTotal));
         }
     }
 }
