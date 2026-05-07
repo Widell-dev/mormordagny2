@@ -1,5 +1,6 @@
 using api.DTOs;
 using api.DTOs.CustomerDTO;
+using api.DTOs.IngredientDTO;
 using api.DTOs.Orders;
 using api.DTOs.ProductDTO;
 using api.DTOs.SupplierDTO;
@@ -19,9 +20,17 @@ namespace api.Helpers
             CreateMap<Order, OrderSumDTO>();
 
             CreateMap<PostCustomerDTO, Customer>()
-            .ForMember(dest => dest.DeliveryAddress, opt => opt.MapFrom(src => src.DeliveryAddress))
-            .ForMember(dest => dest.InvoiceAddress, opt => opt.MapFrom(src => src.InvoiceAddress));
+                .ForMember(dest => dest.DeliveryAddress, opt => opt.MapFrom(src => src.DeliveryAddress))
+                .ForMember(dest => dest.InvoiceAddress, opt => opt.MapFrom(src => src.InvoiceAddress));
             CreateMap<AddressDTO, Address>();
+
+            CreateMap<Ingredient, GetIngredientDTO>()
+                .ForMember(d => d.Suppliers, o => o.MapFrom(s => s.SupplierIngredients));
+
+            CreateMap<SupplierIngredient, SupplierIngredientDTO>()
+                .ForMember(d => d.IngredientName, o => o.MapFrom(s => s.Ingredient.IngredientName))
+                .ForMember(d => d.Email, o => o.MapFrom(s => s.Supplier.Email))
+                .ForMember(d => d.PricePerKg, o => o.MapFrom(s => s.PricePerKg));
 
 
             CreateMap<Product, GetProductDTO>();
@@ -29,7 +38,7 @@ namespace api.Helpers
             CreateMap<PatchProductDTO, Product>();
 
             CreateMap<OrderItem, GetOrderItemDTO>()
-            .ForMember(d => d.ProductName, m => m.MapFrom(s => s.ItemOrdered.ProductName));
+                .ForMember(d => d.ProductName, m => m.MapFrom(s => s.ItemOrdered.ProductName));
 
             CreateMap<Order, GetOrdersDTO>()
                 .ForMember(d => d.CustomerName, m => m.MapFrom(s => s.Customer.CompanyName))
