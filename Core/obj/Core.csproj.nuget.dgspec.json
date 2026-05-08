@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\johan\\Documents\\skola\\c#vt26\\mormordagnys2\\Core\\Core.csproj": {}
+    "C:\\Users\\johan\\Documents\\skola\\c#vt26\\MormorDagnys2\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\johan\\Documents\\skola\\c#vt26\\mormordagnys2\\Core\\Core.csproj": {
+    "C:\\Users\\johan\\Documents\\skola\\c#vt26\\MormorDagnys2\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\johan\\Documents\\skola\\c#vt26\\mormordagnys2\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\johan\\Documents\\skola\\c#vt26\\MormorDagnys2\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\johan\\Documents\\skola\\c#vt26\\mormordagnys2\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\johan\\Documents\\skola\\c#vt26\\MormorDagnys2\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\johan\\Documents\\skola\\c#vt26\\mormordagnys2\\Core\\obj\\",
+        "outputPath": "C:\\Users\\johan\\Documents\\skola\\c#vt26\\MormorDagnys2\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config"

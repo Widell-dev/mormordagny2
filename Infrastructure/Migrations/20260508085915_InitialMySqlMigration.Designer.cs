@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -11,34 +12,38 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MormorDagnysContext))]
-    [Migration("20260505193159_SupplierAddressOwned")]
-    partial class SupplierAddressOwned
+    [Migration("20260508085915_InitialMySqlMigration")]
+    partial class InitialMySqlMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.7");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Core.Entities.Customer", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ContactPerson")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -48,18 +53,18 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Orders.Order", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("OrderDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("OrderNumber")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -71,16 +76,16 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Orders.OrderItem", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("OrderId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -92,27 +97,27 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("BestBefore")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<decimal>("PricePerUnit")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("ProductWeight")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<DateTime>("ProductionDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("QuantityPerPackage")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -122,15 +127,15 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Purchases.Ingredient", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("IngredientName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ItemNumber")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -140,23 +145,23 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Purchases.Supplier", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ContactPerson")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SupplierName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -166,18 +171,18 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Core.Entities.Purchases.SupplierIngredient", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("IngredientId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<decimal>("PricePerKg")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("SupplierId")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -193,19 +198,19 @@ namespace Infrastructure.Migrations
                     b.OwnsOne("Core.Entities.Address", "DeliveryAddress", b1 =>
                         {
                             b1.Property<string>("CustomerId")
-                                .HasColumnType("TEXT");
+                                .HasColumnType("varchar(255)");
 
                             b1.Property<string>("AddressLine")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PostalCode")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("CustomerId");
 
@@ -218,19 +223,19 @@ namespace Infrastructure.Migrations
                     b.OwnsOne("Core.Entities.Address", "InvoiceAddress", b1 =>
                         {
                             b1.Property<string>("CustomerId")
-                                .HasColumnType("TEXT");
+                                .HasColumnType("varchar(255)");
 
                             b1.Property<string>("AddressLine")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PostalCode")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("CustomerId");
 
@@ -268,15 +273,15 @@ namespace Infrastructure.Migrations
                     b.OwnsOne("Core.Entities.Orders.ItemOrdered", "ItemOrdered", b1 =>
                         {
                             b1.Property<string>("OrderItemId")
-                                .HasColumnType("TEXT");
+                                .HasColumnType("varchar(255)");
 
                             b1.Property<string>("ProductId")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("ProductName")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("OrderItemId");
 
@@ -295,19 +300,19 @@ namespace Infrastructure.Migrations
                     b.OwnsOne("Core.Entities.Address", "Address", b1 =>
                         {
                             b1.Property<string>("SupplierId")
-                                .HasColumnType("TEXT");
+                                .HasColumnType("varchar(255)");
 
                             b1.Property<string>("AddressLine")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("City")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.Property<string>("PostalCode")
                                 .IsRequired()
-                                .HasColumnType("TEXT");
+                                .HasColumnType("longtext");
 
                             b1.HasKey("SupplierId");
 
