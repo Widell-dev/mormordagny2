@@ -7,8 +7,8 @@ namespace api.DTOs.SupplierDTO
 {
     public class SupplierIngredientDTO:BaseSupplierDTO
     {
-        public string IngredientId { get; set; }
-        public string IngredientName { get; set; }
+        public required string IngredientId { get; set; }
+        public required string IngredientName { get; set; }
         public decimal PricePerKg { get; set; }
     }
 }

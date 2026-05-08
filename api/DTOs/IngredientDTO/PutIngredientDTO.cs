@@ -7,6 +7,6 @@ namespace api.DTOs.IngredientDTO
 {
     public class PutIngredientDTO
     {
-        public string IngredientName { get; set; }
+        public required string IngredientName { get; set; }
     }
 }

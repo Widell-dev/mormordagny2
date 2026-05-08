@@ -7,9 +7,9 @@ namespace api.DTOs.Orders
 {
     public class GetOrderItemDTO
     {
-        public string ProductName { get; set; } = null!;
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public decimal SubTotal { get; set; }
+        public required string ProductName { get; set; }
+        public required decimal Price { get; set; }
+        public required int Quantity { get; set; }
+        public required decimal SubTotal { get; set; }
     }
 }

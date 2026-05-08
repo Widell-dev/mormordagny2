@@ -7,7 +7,7 @@ namespace api.DTOs.SupplierDTO
 {
     public class PostSupplierIngredientDTO
     {
-        public string IngredientId { get; set; }
+        public required string IngredientId { get; set; }
         public decimal PricePerKg { get; set; }
 
     }

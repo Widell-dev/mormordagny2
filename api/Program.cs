@@ -7,9 +7,14 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("mysql");
+
 builder.Services.AddDbContext<MormorDagnysContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("sqlite"));
+    //options.UseSqlite(builder.Configuration.GetConnectionString("sqlite"));
+    options.UseMySql(connectionString,
+    new MySqlServerVersion(new Version(8, 0, 36)));
+
 });
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
