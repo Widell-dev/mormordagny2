@@ -1,0 +1,31 @@
+# Build
+bin/
+obj/
+
+# User-specific files
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# EF Core
+Migrations/*.Designer.cs
+Migrations/*Snapshot.cs
+
+# SQLite (if accidentally created)
+*.db
+
+# Docker
+docker-compose.override.yml
+
+# Sensitive config
+appsettings.Development.json
+
+# SourceLink
+*.sourcelink.json
+
+# Publish output
+publish/
